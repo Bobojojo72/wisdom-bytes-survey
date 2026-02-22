@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wisdom Bytes — Help Us Help You!</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --violet: #D500F9;
+    --mango: #FF6D00;
+    --sunshine: #FFD600;
+    --deep-space: #12002F;
+    --cream: #FDF4FF;
+    --mid-purple: #2D0060;
+    --light-violet: #EE88FF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: var(--deep-space);
+    color: var(--cream);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Animated starfield background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,214,0,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 40% 8%, rgba(213,0,249,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(255,214,0,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 85% 70%, rgba(213,0,249,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 92% 15%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 80%, rgba(255,214,0,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 90%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 78% 48%, rgba(213,0,249,0.3) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    padding: 50px 20px 40px;
+    position: relative;
+  }
+
+  .star-icon {
+    font-size: 52px;
+    display: block;
+    margin-bottom: 12px;
+    animation: twinkle 2s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    50% { transform: scale(1.15) rotate(10deg); opacity: 0.85; }
+  }
+
+  .logo-text {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .logo-text span:first-child { color: #fff; }
+  .logo-text span:last-child { color: var(--sunshine); }
+
+  .tagline {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--light-violet);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .header-divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--violet), var(--sunshine));
+    margin: 0 auto 28px;
+    border-radius: 2px;
+  }
+
+  .intro-box {
+    background: linear-gradient(135deg, rgba(213,0,249,0.12), rgba(255,109,0,0.08));
+    border: 1px solid rgba(213,0,249,0.3);
+    border-radius: 16px;
+    padding: 24px 28px;
+    text-align: left;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--cream);
+  }
+
+  .intro-box strong {
+    color: var(--sunshine);
+    font-weight: 700;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 44px 0 24px;
+    padding: 16px 22px;
+    background: linear-gradient(135deg, rgba(213,0,249,0.2), rgba(255,109,0,0.15));
+    border-left: 4px solid var(--violet);
+    border-radius: 0 12px 12px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, rgba(213,0,249,0.05), transparent);
+    pointer-events: none;
+  }
+
+  .section-emoji {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+
+  .section-header h2 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+
+  .section-header p {
+    font-size: 0.85rem;
+    color: var(--light-violet);
+    margin-top: 2px;
+  }
+
+  /* QUESTION CARDS */
+  .question-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(213,0,249,0.2);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .question-card:hover {
+    border-color: rgba(213,0,249,0.45);
+    background: rgba(255,255,255,0.06);
+  }
+
+  .question-label {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #fff;
+    margin-bottom: 14px;
+    line-height: 1.5;
+    display: flex;
+    gap: 10px;
+  }
+
+  .q-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: linear-gradient(135deg, var(--violet), var(--mango));
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #fff;
+    margin-top: 1px;
+  }
+
+  /* Radio & Checkbox options */
+  .options-grid {
+    display: grid;
+    gap: 10px;
+  }
+
+  .option-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 1rem;
+    color: var(--cream);
+    font-weight: 500;
+  }
+
+  .option-label:hover {
+    background: rgba(213,0,249,0.12);
+    border-color: var(--violet);
+    color: #fff;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border: 2px solid rgba(213,0,249,0.5);
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+  }
+
+  input[type="checkbox"] {
+    border-radius: 6px;
+  }
+
+  input[type="radio"]:checked,
+  input[type="checkbox"]:checked {
+    background: linear-gradient(135deg, var(--violet), var(--mango));
+    border-color: var(--violet);
+    box-shadow: 0 0 8px rgba(213,0,249,0.5);
+  }
+
+  input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 7px; height: 7px;
+    background: #fff;
+    border-radius: 50%;
+  }
+
+  input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    color: #fff;
+    font-weight: 800;
+  }
+
+  input[type="radio"]:checked + span,
+  input[type="checkbox"]:checked + span {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* Text inputs & textareas */
+  .text-input,
+  textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(213,0,249,0.3);
+    border-radius: 10px;
+    padding: 14px 16px;
+    color: #fff;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    resize: vertical;
+  }
+
+  .text-input::placeholder,
+  textarea::placeholder {
+    color: rgba(253,244,255,0.35);
+  }
+
+  .text-input:focus,
+  textarea:focus {
+    border-color: var(--violet);
+    background: rgba(213,0,249,0.08);
+    box-shadow: 0 0 0 3px rgba(213,0,249,0.15);
+  }
+
+  textarea { min-height: 90px; }
+
+  /* Scale rating */
+  .scale-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 4px;
+  }
+
+  .scale-label-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--light-violet);
+    margin-top: 8px;
+  }
+
+  .scale-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(213,0,249,0.35);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.04);
+    color: var(--cream);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .scale-btn:hover,
+  .scale-btn.selected {
+    background: linear-gradient(135deg, var(--violet), var(--mango));
+    border-color: transparent;
+    color: #fff;
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(213,0,249,0.4);
+  }
+
+  /* SUBMIT SECTION */
+  .submit-section {
+    margin-top: 44px;
+    text-align: center;
+  }
+
+  .submit-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--mango), var(--sunshine));
+    color: var(--deep-space);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    padding: 18px 48px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+    box-shadow: 0 6px 24px rgba(255,109,0,0.4);
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(255,109,0,0.5);
+  }
+
+  .print-btn {
+    display: inline-block;
+    background: transparent;
+    color: var(--light-violet);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 14px 32px;
+    border-radius: 50px;
+    border: 1px solid rgba(213,0,249,0.4);
+    cursor: pointer;
+    margin-left: 14px;
+    transition: all 0.2s;
+  }
+
+  .print-btn:hover {
+    background: rgba(213,0,249,0.12);
+    border-color: var(--violet);
+    color: #fff;
+  }
+
+  /* THANK YOU STATE */
+  #thankyou {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+    animation: fadeIn 0.6s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  #thankyou .star-burst {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    display: block;
+    animation: twinkle 1.5s ease-in-out infinite;
+  }
+
+  #thankyou h2 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    color: var(--sunshine);
+    margin-bottom: 16px;
+  }
+
+  #thankyou p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--cream);
+    max-width: 500px;
+    margin: 0 auto 24px;
+  }
+
+  .signoff {
+    font-family: 'Raleway', sans-serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--light-violet);
+    margin-top: 20px;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid rgba(213,0,249,0.2);
+    margin-top: 20px;
+  }
+
+  .footer p {
+    font-size: 0.85rem;
+    color: rgba(253,244,255,0.45);
+  }
+
+  .footer .signoff-main {
+    font-family: 'Raleway', sans-serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--light-violet);
+    margin-bottom: 10px;
+  }
+
+  /* PRINT STYLES */
+  @media print {
+    body {
+      background: #fff !important;
+      color: #12002F !important;
+    }
+    body::before { display: none; }
+    .header { padding: 20px 0; }
+    .logo-text span { color: #12002F !important; }
+    .tagline, .section-header p { color: #6600AA !important; }
+    .intro-box {
+      background: #f5e6ff !important;
+      border-color: #D500F9 !important;
+      color: #12002F !important;
+    }
+    .section-header {
+      background: linear-gradient(135deg, #f0d0ff, #ffe8d0) !important;
+      border-left-color: #D500F9 !important;
+    }
+    .section-header h2 { color: #12002F !important; }
+    .question-card {
+      background: #fafafa !important;
+      border-color: #ddd !important;
+      break-inside: avoid;
+    }
+    .question-label { color: #12002F !important; }
+    .option-label {
+      background: #f5f5f5 !important;
+      border-color: #ddd !important;
+      color: #12002F !important;
+    }
+    .text-input, textarea {
+      background: #fff !important;
+      border-color: #999 !important;
+      color: #12002F !important;
+    }
+    .submit-section, .print-btn, .submit-btn { display: none !important; }
+    .footer { border-top-color: #ddd !important; }
+    .footer p, .footer .signoff-main { color: #6600AA !important; }
+    .q-number { background: #D500F9 !important; }
+    .scale-btn {
+      border-color: #ccc !important;
+      color: #12002F !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .print-btn { margin-left: 0; margin-top: 12px; display: block; }
+    .submit-btn { width: 100%; }
+    .scale-btn { width: 38px; height: 38px; font-size: 0.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <span class="star-icon">🌟</span>
+    <div class="logo-text">
+      <span>Wisdom</span><span>Bytes</span>
+    </div>
+    <div class="tagline">AI Made Simple for the Generation That's Seen It All</div>
+    <div class="header-divider"></div>
+    <div class="intro-box">
+      <strong>Hello and welcome — and thank you so much for being here! ✨</strong><br><br>
+      We're putting together a brand new YouTube channel called <strong>Wisdom Bytes</strong> — designed to help people just like you get comfortable with AI tools and modern technology, in a way that's friendly, fun, and completely jargon-free.<br><br>
+      Before we film a single video, we want to hear from <strong>you</strong>. What do you want to know? What worries you? What would make your everyday life easier? This survey takes about <strong>5–10 minutes</strong> and every answer genuinely shapes what we create. There are no right or wrong answers here — just yours! 💜
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <form id="wisdomForm">
+
+    <!-- SECTION 1 -->
+    <div class="section-header">
+      <span class="section-emoji">👋</span>
+      <div>
+        <h2>Section 1 — A Bit About You</h2>
+        <p>Just a few quick ones to help us understand who we're talking to</p>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">1</span><span>What is your age range?</span></div>
+      <div class="options-grid">
+        <label class="option-label"><input type="radio" name="q1" value="60-64"><span>60–64</span></label>
+        <label class="option-label"><input type="radio" name="q1" value="65-69"><span>65–69</span></label>
+        <label class="option-label"><input type="radio" name="q1" value="70-74"><span>70–74</span></label>
+        <label class="option-label"><input type="radio" name="q1" value="75+"><span>75 or over</span></label>
+        <label class="option-label"><input type="radio" name="q1" value="prefer-not"><span>Prefer not to say</span></label>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">2</span><span>How would you describe your confidence with technology?</span></div>
+      <div class="options-grid">
+        <label class="option-label"><input type="radio" name="q2" value="beginner"><span>Complete beginner — I find it all a bit baffling!</span></label>
+        <label class="option-label"><input type="radio" name="q2" value="some"><span>I can manage the basics but get stuck easily</span></label>
+        <label class="option-label"><input type="radio" name="q2" value="ok"><span>I'm okay but there's a lot I'd love to learn</span></label>
+        <label class="option-label"><input type="radio" name="q2" value="confident"><span>Fairly confident — I just want to know more about AI</span></label>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">3</span><span>Which device do you use most often?</span></div>
+      <div class="options-grid">
+        <label class="option-label"><input type="checkbox" name="q3" value="smartphone"><span>Smartphone</span></label>
+        <label class="option-label"><input type="checkbox" name="q3" value="tablet"><span>Tablet (iPad or similar)</span></label>
+        <label class="option-label"><input type="checkbox" name="q3" value="laptop"><span>Laptop</span></label>
+        <label class="option-label"><input type="checkbox" name="q3" value="desktop"><span>Desktop computer</span></label>
+        <label class="option-label"><input type="checkbox" name="q3" value="smart-speaker"><span>Smart speaker (Alexa, Google etc)</span></label>
+      </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="section-header">
+      <span class="section-emoji">🤖</span>
+      <div>
+        <h2>Section 2 — AI and ChatGPT</h2>
+        <p>Tell us what you already know — and what worries you</p>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">4</span><span>Have you heard of Artificial Intelligence (AI)?</span></div>
+      <div class="options-grid">
+        <label class="option-label"><input type="radio" name="q4" value="yes-lot"><span>Yes — I know quite a bit about it</span></label>
+        <label class="option-label"><input type="radio" name="q4" value="yes-little"><span>Yes — I've heard of it but don't really understand it</span></label>
+        <label class="option-label"><input type="radio" name="q4" value="vaguely"><span>Vaguely — I keep hearing the word!</span></label>
+        <label class="option-label"><input type="radio" name="q4" value="no"><span>Not really, no</span></label>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">5</span><span>Have you ever used ChatGPT or any other AI assistant?</span></div>
+      <div class="options-grid">
+        <label class="option-label"><input type="radio" name="q5" value="yes-regular"><span>Yes — I use it regularly</span></label>
+        <label class="option-label"><input type="radio" name="q5" value="yes-tried"><span>Yes — I've tried it once or twice</span></label>
+        <label class="option-label"><input type="radio" name="q5" value="no-curious"><span>No — but I'm curious!</span></label>
+        <label class="option-label"><input type="radio" name="q5" value="no-nervous"><span>No — and honestly it makes me a bit nervous</span></label>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">6</span><span>What worries you most about AI? (Tick all that apply)</span></div>
+      <div class="options-grid">
+        <label class="option-label"><input type="checkbox" name="q6" value="privacy"><span>Privacy — could it access my personal information?</span></label>
+        <label class="option-label"><input type="checkbox" name="q6" value="scams"><span>Scams and being tricked</span></label>
+        <label class="option-label"><input type="checkbox" name="q6" value="complicated"><span>It looks too complicated for me</span></label>
+        <label class="option-label"><input type="checkbox" name="q6" value="mistakes"><span>What if it gives me wrong information?</span></label>
+        <label class="option-label"><input type="checkbox" name="q6" value="replacing-people"><span>It replacing real human connection</span></label>
+        <label class="option-label"><input type="checkbox" name="q6" value="nothing"><span>Nothing really — I'm quite open to it!</span></label>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">7</span><span>In one sentence, how does the idea of AI make you feel right now?</span></div>
+      <textarea name="q7" class="text-input" placeholder="For example: 'Curious but a bit cautious!' — there's no wrong answer…"></textarea>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="section-header">
+      <span class="section-emoji">💛</span>
+      <div>
+        <h2>Section 3 — What Would You Love Help With?</h2>
+        <p>This is the big one — tell us what matters to you!</p>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">8</span><span>When it comes to your health and wellbeing, would AI help be useful for any of these? (Tick all that apply)</span></div>
+      <div class="options-grid">
+        <label class="option-label"><input type="checkbox" name="q8" value="understanding-diagnoses"><span>Understanding medical information or diagnoses</span></label>
+        <label class="option-label"><input type="checkbox" name="q8" value="medication"><span>Keeping track of medications or appointments</span></label>
+        <label class="option-label"><input type="checkbox" name="q8" value="healthy-eating"><span>Healthy eating or recipe ideas</span></label>
+        <label class="option-label"><input type="checkbox" name="q8" value="gentle-exercise"><span>Gentle exercise suggestions</span></label>
+        <label class="option-label"><input type="checkbox" name="q8" value="mental-wellbeing"><span>Mental wellbeing and staying positive</span></label>
+        <label class="option-label"><input type="checkbox" name="q8" value="none"><span>None of these for me, thanks</span></label>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">9</span><span>What about everyday life? Would AI help be useful for any of these?</span></div>
+      <div class="options-grid">
+        <label class="option-label"><input type="checkbox" name="q9" value="shopping"><span>Online shopping or finding good deals</span></label>
+        <label class="option-label"><input type="checkbox" name="q9" value="writing-letters"><span>Writing letters, emails or messages</span></label>
+        <label class="option-label"><input type="checkbox" name="q9" value="planning"><span>Planning trips or days out</span></label>
+        <label class="option-label"><input type="checkbox" name="q9" value="finances"><span>Understanding bills, finances or forms</span></label>
+        <label class="option-label"><input type="checkbox" name="q9" value="news"><span>Making sense of the news</span></label>
+        <label class="option-label"><input type="checkbox" name="q9" value="home"><span>Home tasks like recipes or DIY advice</span></label>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">10</span><span>What hobbies or interests would you love AI to help with?</span></div>
+      <textarea name="q10" class="text-input" placeholder="e.g. gardening, genealogy, writing, crafts, travel, photography, music…"></textarea>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">11</span><span>Do you use technology to stay connected with family and friends?</span></div>
+      <div class="options-grid">
+        <label class="option-label"><input type="radio" name="q11" value="yes-confident"><span>Yes, and I'm fairly confident with it</span></label>
+        <label class="option-label"><input type="radio" name="q11" value="yes-struggle"><span>Yes but I sometimes struggle</span></label>
+        <label class="option-label"><input type="radio" name="q11" value="not-much"><span>Not much — I'd love to do it more</span></label>
+        <label class="option-label"><input type="radio" name="q11" value="no"><span>Not really</span></label>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">12</span><span>Is there anything else in your daily life that technology or AI could make easier or more enjoyable?</span></div>
+      <textarea name="q12" class="text-input" placeholder="Tell us anything — big or small, we want to know!"></textarea>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="section-header">
+      <span class="section-emoji">📺</span>
+      <div>
+        <h2>Section 4 — How You Like to Learn</h2>
+        <p>Help us make videos that actually work for you</p>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">13</span><span>How do you prefer to learn something new?</span></div>
+      <div class="options-grid">
+        <label class="option-label"><input type="radio" name="q13" value="watching"><span>Watching someone show me step by step</span></label>
+        <label class="option-label"><input type="radio" name="q13" value="reading"><span>Reading instructions at my own pace</span></label>
+        <label class="option-label"><input type="radio" name="q13" value="trying"><span>Just having a go and figuring it out</span></label>
+        <label class="option-label"><input type="radio" name="q13" value="friend"><span>Having a friend or family member explain it</span></label>
+        <label class="option-label"><input type="radio" name="q13" value="class"><span>In a group class or workshop</span></label>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">14</span><span>How long should a Wisdom Bytes video be?</span></div>
+      <div class="options-grid">
+        <label class="option-label"><input type="radio" name="q14" value="under5"><span>Short and sweet — under 5 minutes</span></label>
+        <label class="option-label"><input type="radio" name="q14" value="5-10"><span>5–10 minutes — just right</span></label>
+        <label class="option-label"><input type="radio" name="q14" value="10-20"><span>10–20 minutes — I like a good explanation</span></label>
+        <label class="option-label"><input type="radio" name="q14" value="20+"><span>20+ minutes is fine if it's good!</span></label>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">15</span><span>What puts you off watching tutorial videos? (Tick all that apply)</span></div>
+      <div class="options-grid">
+        <label class="option-label"><input type="checkbox" name="q15" value="too-fast"><span>They go too fast</span></label>
+        <label class="option-label"><input type="checkbox" name="q15" value="jargon"><span>Too much jargon and technical language</span></label>
+        <label class="option-label"><input type="checkbox" name="q15" value="boring"><span>They're boring or too serious</span></label>
+        <label class="option-label"><input type="checkbox" name="q15" value="assumes-knowledge"><span>They assume you already know things</span></label>
+        <label class="option-label"><input type="checkbox" name="q15" value="too-long"><span>They're too long</span></label>
+        <label class="option-label"><input type="checkbox" name="q15" value="nothing"><span>Nothing — I love a good tutorial!</span></label>
+      </div>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="section-header">
+      <span class="section-emoji">✨</span>
+      <div>
+        <h2>Section 5 — Your Wish List</h2>
+        <p>If you could ask anything, what would it be?</p>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">16</span><span>If you could ask an AI assistant one question right now, what would it be?</span></div>
+      <textarea name="q16" class="text-input" placeholder="There are no silly questions here — we mean it!"></textarea>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">17</span><span>What's one thing you'd love to be able to do with technology that you can't do yet?</span></div>
+      <textarea name="q17" class="text-input" placeholder="Dream big — or keep it practical. Whatever feels right for you!"></textarea>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">18</span><span>Which of these topics would you most like Wisdom Bytes to cover first? (Pick your top 3)</span></div>
+      <div class="options-grid">
+        <label class="option-label"><input type="checkbox" name="q18" value="what-is-ai"><span>What is AI and should I be worried?</span></label>
+        <label class="option-label"><input type="checkbox" name="q18" value="chatgpt-basics"><span>ChatGPT for complete beginners</span></label>
+        <label class="option-label"><input type="checkbox" name="q18" value="scams"><span>How to spot AI scams and stay safe</span></label>
+        <label class="option-label"><input type="checkbox" name="q18" value="health"><span>Using AI for health information</span></label>
+        <label class="option-label"><input type="checkbox" name="q18" value="family"><span>Staying connected with family using tech</span></label>
+        <label class="option-label"><input type="checkbox" name="q18" value="everyday"><span>AI for everyday tasks (shopping, letters, planning)</span></label>
+        <label class="option-label"><input type="checkbox" name="q18" value="photos"><span>Organising and sharing photos</span></label>
+        <label class="option-label"><input type="checkbox" name="q18" value="hobbies"><span>AI for hobbies and interests</span></label>
+      </div>
+    </div>
+
+    <!-- SECTION 6 -->
+    <div class="section-header">
+      <span class="section-emoji">🎉</span>
+      <div>
+        <h2>Section 6 — Finishing Up</h2>
+        <p>Nearly done — you're doing brilliantly!</p>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">19</span><span>Would you be interested in attending a free local workshop on AI for beginners?</span></div>
+      <div class="options-grid">
+        <label class="option-label"><input type="radio" name="q19" value="yes-definitely"><span>Yes — definitely!</span></label>
+        <label class="option-label"><input type="radio" name="q19" value="yes-maybe"><span>Maybe — tell me more</span></label>
+        <label class="option-label"><input type="radio" name="q19" value="online-only"><span>I'd prefer an online version</span></label>
+        <label class="option-label"><input type="radio" name="q19" value="no"><span>No thanks — videos are enough for me</span></label>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label"><span class="q-number">20</span><span>Would you be happy for us to follow up with you? If so, pop your email below — we promise no spam, just good stuff from Jo! 💜</span></div>
+      <input type="email" name="q20" class="text-input" placeholder="your@email.com (completely optional!)">
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-section">
+      <button type="submit" class="submit-btn">✨ Send My Answers to Jo!</button>
+      <button type="button" class="print-btn" onclick="window.print()">🖨️ Print This Form</button>
+    </div>
+
+  </form>
+
+  <!-- THANK YOU -->
+  <div id="thankyou">
+    <span class="star-burst">🌟</span>
+    <h2>You absolute star — thank you!</h2>
+    <p>Your answers have been sent and they mean the world to us. Every single response genuinely shapes what Wisdom Bytes creates next.</p>
+    <p>Watch out for our first video coming very soon — and remember, it's never too late to learn something new. You've already proved that today! 💜</p>
+    <div class="signoff">One byte wiser, one less AI fear — I'm Jo, and I'm outta here! ✨</div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="signoff-main">One byte wiser, one less AI fear — I'm Jo, and I'm outta here! ✨</div>
+    <p>© Wisdom Bytes — AI Made Simple for the Generation That's Seen It All</p>
+  </div>
+
+</div>
+
+<script>
+  // Scale buttons
+  document.querySelectorAll('.scale-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const group = this.closest('.scale-row');
+      group.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+      const hidden = group.nextElementSibling?.querySelector('input[type=hidden]');
+      if (hidden) hidden.value = this.dataset.value;
+    });
+  });
+
+  // Form submit
+  document.getElementById('wisdomForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('wisdomForm').style.display = 'none';
+    document.getElementById('thankyou').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Checkbox limit for Q18 (max 3)
+  document.querySelectorAll('input[name="q18"]').forEach(cb => {
+    cb.addEventListener('change', function() {
+      const checked = document.querySelectorAll('input[name="q18"]:checked');
+      if (checked.length > 3) {
+        this.checked = false;
+        alert('Please pick your top 3 topics only! 😊');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
